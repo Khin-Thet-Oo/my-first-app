@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="cartView">
+
+    <div class="alert alert-success" role="alert" th:if="${cartItems.isEmpty()}">
+        <h3>No Items In cart</h3>
+        <a href="#" th:href="@{/show-all-books}" class="btn btn-outline-info">Continue Shopping</a>
+    </div>
+    <div th:if="${!cartItems.isEmpty()}">
+        <form th:action="@{/customer/register}" method="post" th:object="${bookDto}">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${cartItems}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.title}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="number" step="1"  min="1" th:field="*{bookNumberList}" class="form-control">
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+                        <a href="#" th:href="@{'/cart/delete/'+${item.id}}" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                    <td></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+            <div class="p-4">
+                <a href="#" th:href="@{/cart/clear}" class="btn btn-outline-danger">Clear Cart</a>
+                <a href="#" th:href="@{/show-all-books}" class="btn btn-outline-info">Continue Shopping</a>
+                <!--<a href="#" class="btn btn-outline-primary">CheckOut</a>-->
+            </div>
+            <button type="submit" class="btn btn-outline-info">CheckOut</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

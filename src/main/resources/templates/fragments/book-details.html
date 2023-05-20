@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="bookDetail" class="row">
+    <div class="col-md-5 mt-3 p-5">
+        <img th:src="${book.imgUrl}"  width="400" height="300" alt="Image" class="img-fluid">
+    </div>
+    <div class="col-md-7 p-5">
+        <h1>Book Details</h1>
+        <h3 th:text="${book.title}"></h3>
+        <p class="lead" th:text="${book.yearPublished}+'in Published.'"></p>
+        <p class="lead" th:text="${book.description}"></p>
+        <p class="lead" th:text="'Written By - '+${book.author.name}"></p>
+        <p class="lead" th:text="'It costs='+${book.price}+'$.'"></p>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dicta doloribus ducimus fugit in
+            inventore nemo, officia perspiciatis provident quam quod reiciendis saepe, sint velit vero vitae voluptatum. Eaque, non!</p>
+
+    </div>
+    <div>
+        <a href="#" th:href="@{'/cart/add?id='+${book.id}}"  class="btn btn-primary btn-lg mr-3">AddToCart</a>
+        <a href="#"  th:href="@{/shop/show-all-books}" class="btn btn-info mr-3 btn-lg">ContinueShopping</a>
+        <a href="#" th:href="@{/cart/view}" class="btn btn-warning mr-3 btn-lg">ViewCart</a>
+
+    </div>
+</div>
+
+</body>
+</html>
